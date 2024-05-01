@@ -26,3 +26,4 @@ Todo:
 - Expand S3 Uploader to support multiple files (so eventually less Python can be defined in the CFN template).
 - Throttle the Lambda function.
 - Parameterize more things.
+- Support updates to the HTML pushing to AWS.
