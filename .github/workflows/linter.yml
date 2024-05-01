@@ -18,10 +18,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pylint
+        pip install yamllint
         pip install cfn-lint
-    - name: Analysing the code with pylint
+    - name: Analysing the Python code with pylint
       run: |
         pylint $(git ls-files '*.py')
-    - name: Analysing the code with cfn-lint
+    - name: Analysing the YAML with yamllint
       run: |
-        cfn-lint -t ./calculator-template.yaml
+        yamllint .
+    - name: Analysing CloudFormation templates with cfn-lint
+      run: |
+        cfn-lint -t $(git ls-files '*.template')
