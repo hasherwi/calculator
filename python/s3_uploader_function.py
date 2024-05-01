@@ -21,8 +21,14 @@ def send_response(event, context, response_status, response_data):
         'content-length': str(len(response_body))
     }
 
-    response_request = request.Request(event['ResponseURL'], method='PUT', data=response_body.encode('utf-8'), headers=headers)
-    with request.urlopen(response_request) as response: 
+    response_request =
+        urllib.request.Request(
+            event['ResponseURL'],
+            method='PUT',
+            data=response_body.encode('utf-8'),
+            headers=headers
+        )
+    with request.urlopen(response_request) as response:
         print("Status code:", response.getcode())
         print("Status message:", response.msg)
 
