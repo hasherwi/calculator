@@ -1,7 +1,7 @@
 ---
 name: Linter
 
-on: [push] # yamllint disable-line rule:truthy
+on: [push]  # yamllint disable-line rule:truthy
 
 jobs:
   pylint_job:
@@ -22,7 +22,7 @@ jobs:
       - name: Analysing the Python code with pylint
         run: |
           pylint $(git ls-files '*.py')
-  
+
   yamllint_job:
     runs-on: ubuntu-latest
     steps:
