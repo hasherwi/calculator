@@ -56,6 +56,6 @@ def lambda_handler(event, context):
 
         send_response(event, context, "SUCCESS", {"Message": "Resource creation successful"})
 
-    except Exception as e:
+    except Exception as e: # pylint: disable=broad-exception-caught
         print("Failed to process:", e)
         send_response(event, context, "FAILED", {"Message": str(e)})
