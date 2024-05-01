@@ -1,8 +1,9 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 Description: |
-  AWS CloudFormation for a simple calculator AWS
-  Lambda function and static website hosting on S3.
+  AWS CloudFormation for a simple webapp calculator
+  AWS Lambda function and static website hosted on
+  Amazon S3.
 
 Parameters:
   HtmlFileUrl:
