@@ -163,6 +163,8 @@ Resources:
                   - 'logs:CreateLogGroup'
                   - 'logs:CreateLogStream'
                   - 'logs:PutLogEvents'
+                  - 'xray:PutTraceSegments'
+                  - 'xray:PutTelemetryRecords'
                 Resource: '*'
               - Effect: Allow
                 Action:
