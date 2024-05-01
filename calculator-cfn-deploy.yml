@@ -1,4 +1,3 @@
-template-file-path: calculator-template.yaml
-parameters:
-    HtmlFileUrl: https://raw.githubusercontent.com/hasherwi/calculator/main/calculator-page.html
+template-file-path: calculator-template.template
+parameters: {}
 tags: {}
