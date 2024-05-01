@@ -9,7 +9,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10", "3.11", "3.12"]
-        #AWS Lambda versions: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+        # AWS Lambda versions:
+        # https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
     steps:
       - name: Pull Git Repo
         uses: actions/checkout@v4
