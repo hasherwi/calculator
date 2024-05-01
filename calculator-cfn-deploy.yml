@@ -1,4 +1,5 @@
+---
 template-file-path: calculator-template.template
 parameters:
-    HtmlFileUrl: https://raw.githubusercontent.com/hasherwi/calculator/main/calculator-page.html
+    HtmlFileUrl: https://raw.githubusercontent.com/hasherwi/calculator/main/calculator-page.html # yamllint disable-line rule:line-length
 tags: {}
