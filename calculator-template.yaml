@@ -11,7 +11,7 @@ Resources:
   CalculatorLambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Handler: lambda_handler
+      Handler: index.lambda_handler
       Role: !GetAtt CalculatorLambdaFunctionExecutionRole.Arn
       Runtime: python3.8
       TracingConfig:
@@ -83,7 +83,7 @@ Resources:
   HtmlUploaderLambda:
     Type: AWS::Lambda::Function
     Properties:
-      Handler: lambda_handler
+      Handler: index.lambda_handler
       Role: !GetAtt HtmlUploaderLambdaExecutionRole.Arn
       Runtime: python3.8
       Code:
