@@ -15,3 +15,8 @@ Architecture:
 Observability:
 - Amazon CloudWatch.
 - Account Level Monitoring (that I'm not going to detail to you).
+
+Todo:
+- Explore AWS X-Ray.
+- Consider a simple mode versus complex mode.
+- Build a more complex pipeline with testing?
