@@ -1,6 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: AWS CloudFormation for a simple calculator Lambda function and static website hosting on S3.
 
+Parameters:
+  HtmlFileUrl:
+    Type: String
+    Default: https://raw.githubusercontent.com/hasherwi/calculator/main/calculator-page.html
+    Description: URL of the HTML file to be uploaded to the S3 bucket.
+
 Resources:
   CalculatorLambdaFunction:
     Type: AWS::Lambda::Function
@@ -70,6 +76,34 @@ Resources:
             Principal: "*"
             Action: "s3:GetObject"
             Resource: !Sub "arn:${AWS::Partition}:s3:::${WebsiteBucket}/calculator-page.html" #${WebsiteBucket} returns just the bucket name.
+            
+  HtmlUploaderLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: index.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Runtime: python3.8
+      Code:
+        ZipFile: |
+          import json
+          import urllib.request
+          import boto3
+
+          def lambda_handler(event, context):
+              s3 = boto3.client('s3')
+              url = event['ResourceProperties']['HtmlFileUrl']
+              response = urllib.request.urlopen(url)
+              data = response.read()
+              bucket_name = event['ResourceProperties']['BucketName']
+              s3.put_object(Bucket=bucket_name, Key='calculator-page.html', Body=data, ContentType='text/html')
+              return {'PhysicalResourceId': event.get('PhysicalResourceId', 'HtmlUploaderLambda')}
+
+  HtmlUploadCustomResource:
+    Type: AWS::CloudFormation::CustomResource
+    Properties:
+      ServiceToken: !GetAtt HtmlUploaderLambda.Arn
+      HtmlFileUrl: !Ref HtmlFileUrl # A Parameter.
+      BucketName: !Ref WebsiteBucket # Returns just the bucket's name.
 
 Outputs:
   LambdaFunctionArn:
