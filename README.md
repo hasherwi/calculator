@@ -1,5 +1,5 @@
 # calculator
-An AWS Calculator Demo
+An AWS Calculator Webapp Demo
 
 Editing:
 - NotePad++ to GitHub Desktop.
