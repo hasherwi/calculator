@@ -19,15 +19,15 @@ def lambda_handler(event, context):
 
     # Open the URL
     url = event['ResourceProperties']['HtmlFileUrl']
-    response = urllib.request.urlopen(url)
-    data = response.read()
+    with urllib.request.urlopen(url) as response:
+        data = response.read()
 
-    # Store the data in S3.
-    s3.put_object(
-        Bucket=bucket_name,
-        Key='calculator-page.html',
-        Body=data,
-        ContentType='text/html'
-    )
+        # Store the data in S3.
+        s3.put_object(
+            Bucket=bucket_name,
+            Key='calculator-page.html',
+            Body=data,
+            ContentType='text/html'
+        )
 
     return {'PhysicalResourceId': event.get('PhysicalResourceId', 'HtmlUploaderLambda')}
