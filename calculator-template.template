@@ -12,6 +12,14 @@ Parameters:
     Description: URL of the HTML file to be uploaded to the S3 bucket.
 
 Resources:
+  CalculatorLambdaFunctionUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      AuthType: NONE
+      InvokeMode: RESPONSE_STREAM
+      TargetFunctionArn: !GetAtt CalculatorLambdaFunction.Arn
+
+  
   CalculatorLambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
@@ -183,9 +191,9 @@ Resources:
       BucketName: !Ref WebsiteBucket  # Returns just the bucket's name.
 
 Outputs:
-  LambdaFunctionArn:
-    Description: The ARN of the Lambda function
-    Value: !GetAtt CalculatorLambdaFunction.Arn
+  LambdaFunctionUrl:
+    Description: The URL of the Lambda function
+    Value: !GetAtt CalculatorLambdaFunctionUrl.FunctionUrl
   WebsiteURL:
     Description: URL of the S3 website
     Value: !GetAtt WebsiteBucket.WebsiteURL
