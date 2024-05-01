@@ -7,7 +7,7 @@ Editing:
 Deployment:
 - GitHub Connection to AWS CodeCommit.
 - Repository sync to AWS CloudFormation.
-- Custom IAM Role for auth (not in repo yet).
+- Custom IAM Role for Auth: Trust Policy included, Permissions not yet.
 
 Architecture:
 - Public S3 Bucket.

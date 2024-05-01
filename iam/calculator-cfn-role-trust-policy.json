@@ -1,0 +1,21 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CfnTrustPolicy",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudformation.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+        },
+        {
+            "Sid": "CfnGitSyncTrustPolicy",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudformation.sync.codeconnections.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
