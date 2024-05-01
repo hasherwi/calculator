@@ -11,7 +11,7 @@ Resources:
   CalculatorLambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Handler: lambda_function.lambda_handler
+      Handler: lambda_handler
       Role: !GetAtt CalculatorLambdaFunctionExecutionRole.Arn
       Code:
         ZipFile: |
@@ -79,7 +79,7 @@ Resources:
   HtmlUploaderLambda:
     Type: AWS::Lambda::Function
     Properties:
-      Handler: index.lambda_handler
+      Handler: lambda_handler
       Role: !GetAtt HtmlUploaderLambdaExecutionRole.Arn
       Runtime: python3.8
       Code:
