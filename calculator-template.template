@@ -1,7 +1,7 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 Description: |
-  AWS CloudFormation for a simple calculator AWS 
+  AWS CloudFormation for a simple calculator AWS
   Lambda function and static website hosting on S3.
 
 Parameters:
@@ -87,7 +87,7 @@ Resources:
             Action: "s3:GetObject"
             Resource:
               - !Sub "arn:${AWS::Partition}:s3:::${WebsiteBucket}/calculator-page.html"  # yamllint disable-line rule:line-length
-                # ${WebsiteBucket} returns just the bucket name.
+              # ${WebsiteBucket} returns just the bucket name.
 
   HtmlUploaderLambda:
     Type: AWS::Lambda::Function
