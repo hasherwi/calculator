@@ -3,7 +3,6 @@
 import json
 import urllib.request
 import boto3
-from urllib import request
 
 def send_response(event, context, response_status, response_data):
     """Send a signal back to Amazon CloudFormation."""
@@ -29,7 +28,7 @@ def send_response(event, context, response_status, response_data):
 
 def lambda_handler(event, context):
     """A simple Amazon CloudFormation helper function to upload files to Amazon S3."""
-    
+
     try:
         # Log the entire event and context objects
         print("Event: ", json.dumps(event))
@@ -49,9 +48,9 @@ def lambda_handler(event, context):
             Body=data,
             ContentType='text/html'
         )
-        
+
         send_response(event, context, "SUCCESS", {"Message": "Resource creation successful"})
-    
+
     except Exception as e:
         print("Failed to process:", e)
         send_response(event, context, "FAILED", {"Message": str(e)})
