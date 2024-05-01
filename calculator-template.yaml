@@ -64,7 +64,6 @@ Resources:
         BlockPublicPolicy: false
       WebsiteConfiguration:
         IndexDocument: calculator-page.html
-        ErrorDocument: error.html
 
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
