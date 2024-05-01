@@ -12,7 +12,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       Handler: lambda_function.lambda_handler
-      Role: !GetAtt LambdaExecutionRole.Arn
+      Role: !GetAtt CalculatorLambdaFunctionExecutionRole.Arn
       Code:
         ZipFile: |
           import json
@@ -33,7 +33,72 @@ Resources:
               return {'statusCode': 200, 'body': json.dumps({'result': result})}
       Runtime: python3.8
 
-  LambdaExecutionRole:
+  CalculatorLambdaFunctionExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - !Sub lambda.${AWS::URLSuffix}
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+        - PolicyName: LambdaExecutionPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource: '*'
+
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicPolicy: false
+      WebsiteConfiguration:
+        IndexDocument: calculator-page.html
+        ErrorDocument: error.html
+
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebsiteBucket
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "arn:${AWS::Partition}:s3:::${WebsiteBucket}/calculator-page.html" #${WebsiteBucket} returns just the bucket name.
+            
+  HtmlUploaderLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: index.lambda_handler
+      Role: !GetAtt HtmlUploaderLambdaExecutionRole.Arn
+      Runtime: python3.8
+      Code:
+        ZipFile: |
+          import json
+          import urllib.request
+          import boto3
+
+          def lambda_handler(event, context):
+              s3 = boto3.client('s3')
+              url = event['ResourceProperties']['HtmlFileUrl']
+              response = urllib.request.urlopen(url)
+              data = response.read()
+              bucket_name = event['ResourceProperties']['BucketName']
+              s3.put_object(Bucket=bucket_name, Key='calculator-page.html', Body=data, ContentType='text/html')
+              return {'PhysicalResourceId': event.get('PhysicalResourceId', 'HtmlUploaderLambda')}
+              
+  HtmlUploaderLambdaExecutionRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -64,47 +129,6 @@ Resources:
                 Action:
                   - 's3:ListBucket'
                 Resource: !Sub 'arn:${AWS::Partition}:s3:::${WebsiteBucket}'
-
-  WebsiteBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      PublicAccessBlockConfiguration:
-        BlockPublicPolicy: false
-      WebsiteConfiguration:
-        IndexDocument: calculator-page.html
-        ErrorDocument: error.html
-
-  BucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      Bucket: !Ref WebsiteBucket
-      PolicyDocument:
-        Statement:
-          - Effect: Allow
-            Principal: "*"
-            Action: "s3:GetObject"
-            Resource: !Sub "arn:${AWS::Partition}:s3:::${WebsiteBucket}/calculator-page.html" #${WebsiteBucket} returns just the bucket name.
-            
-  HtmlUploaderLambda:
-    Type: AWS::Lambda::Function
-    Properties:
-      Handler: index.lambda_handler
-      Role: !GetAtt LambdaExecutionRole.Arn
-      Runtime: python3.8
-      Code:
-        ZipFile: |
-          import json
-          import urllib.request
-          import boto3
-
-          def lambda_handler(event, context):
-              s3 = boto3.client('s3')
-              url = event['ResourceProperties']['HtmlFileUrl']
-              response = urllib.request.urlopen(url)
-              data = response.read()
-              bucket_name = event['ResourceProperties']['BucketName']
-              s3.put_object(Bucket=bucket_name, Key='calculator-page.html', Body=data, ContentType='text/html')
-              return {'PhysicalResourceId': event.get('PhysicalResourceId', 'HtmlUploaderLambda')}
 
   HtmlUploadCustomResource:
     Type: AWS::CloudFormation::CustomResource
