@@ -73,7 +73,7 @@ Resources:
 Outputs:
   LambdaFunctionArn:
     Description: The ARN of the Lambda function
-    Value: !GetAttr CalculatorLambdaFunction.Arn
+    Value: !GetAtt CalculatorLambdaFunction.Arn
   WebsiteURL:
     Description: URL of the S3 website
     Value: !GetAtt WebsiteBucket.WebsiteURL
