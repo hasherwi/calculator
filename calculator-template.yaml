@@ -54,7 +54,8 @@ Resources:
   WebsiteBucket:
     Type: AWS::S3::Bucket
     Properties:
-      AccessControl: PublicRead
+      PublicAccessBlockConfiguration:
+        BlockPublicPolicy: false
       WebsiteConfiguration:
         IndexDocument: calculator-page.html
         ErrorDocument: error.html
