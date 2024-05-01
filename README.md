@@ -22,3 +22,4 @@ Todo:
 - Build a more complex pipeline with testing?
 - Add S3 Lifecycle Rules.
 - Add S3 Server Access Logs.
+- Add IAM permissions policy?
