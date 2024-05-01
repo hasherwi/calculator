@@ -16,7 +16,7 @@ Resources:
     Properties:
       Handler: index.lambda_handler
       Role: !GetAtt CalculatorLambdaFunctionExecutionRole.Arn
-      Runtime: python3.8
+      Runtime: python3.10
       TracingConfig:
         Mode: Active
       Code:
@@ -94,7 +94,7 @@ Resources:
     Properties:
       Handler: index.lambda_handler
       Role: !GetAtt HtmlUploaderLambdaExecutionRole.Arn
-      Runtime: python3.8
+      Runtime: python3.10
       Code:
         # yamllint disable rule:line-length
         ZipFile: |
