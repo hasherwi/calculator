@@ -18,8 +18,9 @@ Observability:
 
 Todo:
 - Consider a simple mode versus complex mode.
-- Build a more complex pipeline with testing?
+- More testing?
 - Add S3 Lifecycle Rules.
 - Add S3 Server Access Logs.
 - Add IAM permissions policy?
 - Add Lambda Custom Helper to Stack to empty S3 bucket on stack delete?
+- Expand S3 Uploader to support multiple files (so eventually less Python can be defined in the CFN template).

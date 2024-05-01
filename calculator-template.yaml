@@ -20,6 +20,8 @@ Resources:
         ZipFile: |
           import json
           def lambda_handler(event, context):
+              print("Event: ", json.dumps(event))
+              print("Context: ", context)
               operation = event.get('operation', 'add')
               number1 = float(event.get('number1', 0))
               number2 = float(event.get('number2', 0))
@@ -91,13 +93,14 @@ Resources:
           import json
           import urllib.request
           import boto3
-
           def lambda_handler(event, context):
+              print("Event: ", json.dumps(event))
+              print("Context: ", context)
               s3 = boto3.client('s3')
+              bucket_name = event['ResourceProperties']['BucketName']
               url = event['ResourceProperties']['HtmlFileUrl']
               response = urllib.request.urlopen(url)
               data = response.read()
-              bucket_name = event['ResourceProperties']['BucketName']
               s3.put_object(Bucket=bucket_name, Key='calculator-page.html', Body=data, ContentType='text/html')
               return {'PhysicalResourceId': event.get('PhysicalResourceId', 'HtmlUploaderLambda')}
               
