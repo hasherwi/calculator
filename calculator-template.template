@@ -1,12 +1,13 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 Description: |
-  AWS CloudFormation for a simple calculator Lambda function and static website hosting on S3.
+  AWS CloudFormation for a simple calculator AWS 
+  Lambda function and static website hosting on S3.
 
 Parameters:
   HtmlFileUrl:
     Type: String
-    Default: https://raw.githubusercontent.com/hasherwi/calculator/main/calculator-page.html # yamllint disable-line rule:line-length
+    Default: https://raw.githubusercontent.com/hasherwi/calculator/main/calculator-page.html  # yamllint disable-line rule:line-length
     Description: URL of the HTML file to be uploaded to the S3 bucket.
 
 Resources:
@@ -85,8 +86,8 @@ Resources:
             Principal: "*"
             Action: "s3:GetObject"
             Resource:
-              - !Sub "arn:${AWS::Partition}:s3:::${WebsiteBucket}/calculator-page.html" # yamllint disable-line rule:line-length
-                    # ${WebsiteBucket} returns just the bucket name.
+              - !Sub "arn:${AWS::Partition}:s3:::${WebsiteBucket}/calculator-page.html"  # yamllint disable-line rule:line-length
+                # ${WebsiteBucket} returns just the bucket name.
 
   HtmlUploaderLambda:
     Type: AWS::Lambda::Function
