@@ -36,7 +36,7 @@ Resources:
           - Effect: Allow
             Principal:
               Service:
-                - lambda.amazonaws.com
+                - !Sub lambda.${AWS::URLSuffix}
             Action:
               - 'sts:AssumeRole'
       Policies:
@@ -69,7 +69,7 @@ Resources:
           - Effect: Allow
             Principal: "*"
             Action: "s3:GetObject"
-            Resource: !Sub "arn:aws:s3:::${WebsiteBucket}/calculator-page.html"
+            Resource: !Sub "arn:${AWS::Partition}:s3:::${WebsiteBucket}/calculator-page.html" #${WebsiteBucket} returns just the bucket name.
 
 Outputs:
   LambdaFunctionArn:

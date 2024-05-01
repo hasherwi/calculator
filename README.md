@@ -20,3 +20,5 @@ Todo:
 - Explore AWS X-Ray.
 - Consider a simple mode versus complex mode.
 - Build a more complex pipeline with testing?
+- Add S3 Lifecycle Rules.
+- Add S3 Server Access Logs.
