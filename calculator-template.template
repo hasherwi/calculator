@@ -116,7 +116,7 @@ Resources:
               'content-length': str(len(response_body))
             }
             response_request = urllib.request.Request(event['ResponseURL'], method='PUT', data=response_body.encode('utf-8'), headers=headers)
-            with request.urlopen(response_request) as response:
+            with urllib.request.urlopen(response_request) as response:
               print("Status code:", response.getcode())
               print("Status message:", response.msg)
           def lambda_handler(event, context):
