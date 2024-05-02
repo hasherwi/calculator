@@ -19,6 +19,13 @@ Resources:
       InvokeMode: RESPONSE_STREAM
       TargetFunctionArn: !GetAtt CalculatorLambdaFunction.Arn
 
+  CalculatorLambdaFunctionPermissions:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunctionUrl
+      FunctionName: !GetAtt CalculatorLambdaFunction.Arn
+      FunctionUrlAuthType: 'NONE'
+      Principal: '*'
   
   CalculatorLambdaFunction:
     Type: AWS::Lambda::Function
