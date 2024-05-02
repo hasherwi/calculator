@@ -47,7 +47,7 @@
             const number2 = document.getElementById('number2').value;
             const operation = document.getElementById('operation').value;
 
-            const response = await fetch('YOUR_API_ENDPOINT', {
+            const response = await fetch('https://6afpqvqeqr76jc36dinvhmhywa0zmhex.lambda-url.us-east-1.on.aws/', {
                 method: 'POST',
                 body: JSON.stringify({number1, number2, operation}),
                 headers: {
