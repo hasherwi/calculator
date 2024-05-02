@@ -18,6 +18,17 @@ Resources:
       AuthType: NONE
       InvokeMode: RESPONSE_STREAM
       TargetFunctionArn: !GetAtt CalculatorLambdaFunction.Arn
+      Cors:
+          AllowCredentials: false
+          AllowHeaders: 
+            - *
+          AllowMethods: 
+            - *
+          AllowOrigins: 
+            - *
+          ExposeHeaders: 
+            - *
+          #MaxAge: Integer
 
   CalculatorLambdaFunctionPermissions:
     Type: AWS::Lambda::Permission
