@@ -24,6 +24,6 @@ Todo:
 - Add IAM permissions policy?
 - Add Lambda Custom Helper to Stack to empty S3 bucket on stack delete?
 - Expand S3 Uploader to support multiple files (so eventually less Python can be defined in the CFN template).
-- Throttle the Lambda function.
 - Parameterize more things.
 - Support updates to the HTML pushing to AWS.
+- Parameterize the bucket name to work with Route 53.
