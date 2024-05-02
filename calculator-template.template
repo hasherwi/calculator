@@ -47,9 +47,10 @@ Resources:
           def lambda_handler(event, context):
               print("Event: ", json.dumps(event))
               print("Context: ", context)
-              operation = event.get('operation', 'add')
-              number1 = float(event.get('number1', 0))
-              number2 = float(event.get('number2', 0))
+              query_params = event.get('queryStringParameters', {})
+              operation = query_params.get('operation', 'add')
+              number1 = float(query_params.get('number1', 0))
+              number2 = float(query_params.get('number2', 0))
               if operation == 'add':
                   result = number1 + number2
               elif operation == 'subtract':

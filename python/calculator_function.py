@@ -11,10 +11,13 @@ def lambda_handler(event, context):
     print("Context: ", context)
         # The context object is not serializable to JSON directly without custom handling
 
+    # Check if query parameters exist
+    query_params = event.get('queryStringParameters', {})
+
     # Extract operation and numbers from the event
-    operation = event.get('operation', 'add')   # Default to 'add'
-    number1 = float(event.get('number1', 0))    # Default to 0
-    number2 = float(event.get('number2', 0))    # Default to 0
+    operation = query_params.get('operation', 'add')   # Default to 'add'
+    number1 = float(query_params.get('number1', 0))    # Default to 0
+    number2 = float(query_params.get('number2', 0))    # Default to 0
 
     # Perform operation
     if operation == 'add':
