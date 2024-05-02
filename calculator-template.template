@@ -33,7 +33,8 @@ Resources:
       Handler: index.lambda_handler
       Role: !GetAtt CalculatorLambdaFunctionExecutionRole.Arn
       Runtime: python3.10
-      ReservedConcurrentExecutions: 1
+      ReservedConcurrentExecutions: 0
+        # Lowest value that still restricts is '1', but ...
         # In a new account, this reserves all capacity, resulting in an error.
         # Either set a value of 0, or increase the quota on your account.
       TracingConfig:
