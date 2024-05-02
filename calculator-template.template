@@ -19,16 +19,16 @@ Resources:
       InvokeMode: RESPONSE_STREAM
       TargetFunctionArn: !GetAtt CalculatorLambdaFunction.Arn
       Cors:
-          AllowCredentials: false
-          AllowHeaders: 
-            - *
-          AllowMethods: 
-            - *
-          AllowOrigins: 
-            - *
-          ExposeHeaders: 
-            - *
-          #MaxAge: Integer
+        AllowCredentials: false
+        #AllowHeaders:
+        #  - *
+        AllowMethods:
+          - *
+        AllowOrigins:
+          - *
+        #ExposeHeaders:
+        #  - *
+        #MaxAge: Integer
 
   CalculatorLambdaFunctionPermissions:
     Type: AWS::Lambda::Permission
@@ -37,7 +37,7 @@ Resources:
       FunctionName: !GetAtt CalculatorLambdaFunction.Arn
       FunctionUrlAuthType: 'NONE'
       Principal: '*'
-  
+
   CalculatorLambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
