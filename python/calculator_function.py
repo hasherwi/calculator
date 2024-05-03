@@ -37,6 +37,9 @@ def lambda_handler(event, context):
                 'Access-Control-Allow-Origin': '*'
             }
         }
+    
+    print("Result: ", result)
+
     return {
         'statusCode': 200,
         'body': json.dumps({'result': result}),
