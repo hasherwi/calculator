@@ -31,11 +31,17 @@ def lambda_handler(event, context):
     else:
         return {
             'statusCode': 400,
-            'body': json.dumps('Invalid operation')
+            'body': json.dumps('Invalid operation'),
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }
         }
-
-    # Return the result
     return {
         'statusCode': 200,
-        'body': json.dumps({'result': result})
+        'body': json.dumps({'result': result}),
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        }
     }
