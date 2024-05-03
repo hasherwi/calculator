@@ -33,6 +33,7 @@ Resources:
             - '*'
           ExposedHeaders:
             - Date
+            - Access-Control-Allow-Origin
           Id: CorsRule1
           MaxAge: 3600
 
