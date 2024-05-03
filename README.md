@@ -18,7 +18,7 @@ Observability:
 - Account Level Monitoring (that I'm not going to detail to you).
 
 Todo:
-- Major: Support changing the Function URL in the HTML dynamically.
+- Major Issue: Support changing the Function URL in the HTML dynamically.
 - Consider a simple mode versus complex mode.
 - More testing?
 - Add S3 Lifecycle Rules.
