@@ -10,7 +10,8 @@ Deployment:
 - Custom IAM Role for Auth: Trust Policy included, Permissions not yet.
 
 Architecture:
-- Public S3 Bucket.
+- Public S3 Bucket with an HTML file, pointing to...
+- An AWS Lambda with a Function URL.
 
 Observability:
 - Amazon CloudWatch.
@@ -21,7 +22,8 @@ Todo:
 - More testing?
 - Add S3 Lifecycle Rules.
 - Add S3 Server Access Logs.
-- Add IAM permissions policy?
+- Add IAM permissions policy for CFN?
+- Can we be more restrictive in IAM?
 - Add Lambda Custom Helper to Stack to empty S3 bucket on stack delete?
 - Expand S3 Uploader to support multiple files (so eventually less Python can be defined in the CFN template).
 - Parameterize more things.

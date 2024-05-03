@@ -53,9 +53,10 @@
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                const data = await response.json();
-                document.getElementById('result').textContent = data.result;
-                console.log('Response from Lambda:', data);
+                const responseData = await response.json();
+                const resultData = JSON.parse(responseData.body);
+                document.getElementById('result').textContent = resultData.result;
+                console.log('Response from Lambda:', responseData);
             } catch (error) {
                 console.error('Error calling Lambda function:', error);
             }
