@@ -18,6 +18,7 @@ Observability:
 - Account Level Monitoring (that I'm not going to detail to you).
 
 Todo:
+- Major: Support changing the Function URL in the HTML dynamically.
 - Consider a simple mode versus complex mode.
 - More testing?
 - Add S3 Lifecycle Rules.
@@ -28,8 +29,9 @@ Todo:
 - Expand S3 Uploader to support multiple files (so eventually less Python can be defined in the CFN template).
 - Parameterize more things.
 - Support updates to the HTML pushing to AWS.
-- Parameterize the bucket name to work with Route 53.
 - Add constraints to the CFN parameters.
 - Support no bucketname listed with conditions.
 - Add favicon.ico.
 - Add robots.txt.
+- Include a Route 53 option?
+- TLS cert option?
