@@ -24,18 +24,19 @@ Resources:
         BlockPublicPolicy: false
       WebsiteConfiguration:
         IndexDocument: calculator-page.html
-      CorsRules:
-        - AllowedHeaders:
-            - '*'
-          AllowedMethods:
-            - '*'
-          AllowedOrigins:
-            - '*'
-          ExposedHeaders:
-            - Date
-            - Access-Control-Allow-Origin
-          Id: CorsRule1
-          MaxAge: 3600
+      CorsConfiguration:
+        CorsRules:
+          - Id: CorsRule1
+            AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - '*'
+            AllowedOrigins:
+              - '*'
+            ExposedHeaders:
+              - Date
+              - Access-Control-Allow-Origin
+            MaxAge: 3600
 
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
