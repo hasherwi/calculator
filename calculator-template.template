@@ -10,8 +10,34 @@ Parameters:
     Type: String
     Default: https://raw.githubusercontent.com/hasherwi/calculator/main/calculator-page.html  # yamllint disable-line rule:line-length
     Description: URL of the HTML file to be uploaded to the S3 bucket.
+  BucketName:
+    Type: String
+    Default: 'calculator.example.com'
+    Description: Name of the S3 bucket to host the website.
 
 Resources:
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName  # A CloudFormation Parameter.
+      PublicAccessBlockConfiguration:
+        BlockPublicPolicy: false
+      WebsiteConfiguration:
+        IndexDocument: calculator-page.html
+
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebsiteBucket
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource:
+              - !Sub "arn:${AWS::Partition}:s3:::${WebsiteBucket}/calculator-page.html"  # yamllint disable-line rule:line-length
+              # ${WebsiteBucket} returns just the bucket name.
+  
   CalculatorLambdaFunctionUrl:
     Type: AWS::Lambda::Url
     Properties:
@@ -100,27 +126,6 @@ Resources:
                   - 'xray:PutTraceSegments'
                   - 'xray:PutTelemetryRecords'
                 Resource: '*'
-
-  WebsiteBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      PublicAccessBlockConfiguration:
-        BlockPublicPolicy: false
-      WebsiteConfiguration:
-        IndexDocument: calculator-page.html
-
-  BucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      Bucket: !Ref WebsiteBucket
-      PolicyDocument:
-        Statement:
-          - Effect: Allow
-            Principal: "*"
-            Action: "s3:GetObject"
-            Resource:
-              - !Sub "arn:${AWS::Partition}:s3:::${WebsiteBucket}/calculator-page.html"  # yamllint disable-line rule:line-length
-              # ${WebsiteBucket} returns just the bucket name.
 
   HtmlUploaderLambda:
     Type: AWS::Lambda::Function
@@ -211,7 +216,7 @@ Resources:
     Type: AWS::CloudFormation::CustomResource
     Properties:
       ServiceToken: !GetAtt HtmlUploaderLambda.Arn
-      HtmlFileUrl: !Ref HtmlFileUrl  # A Parameter.
+      HtmlFileUrl: !Ref HtmlFileUrl  # A CloudFormation Parameter.
       BucketName: !Ref WebsiteBucket  # Returns just the bucket's name.
 
 Outputs:

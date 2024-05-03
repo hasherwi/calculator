@@ -29,3 +29,4 @@ Todo:
 - Parameterize more things.
 - Support updates to the HTML pushing to AWS.
 - Parameterize the bucket name to work with Route 53.
+- Add constraints to the CFN parameters.
