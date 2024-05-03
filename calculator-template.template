@@ -57,15 +57,13 @@ Resources:
       TargetFunctionArn: !GetAtt CalculatorLambdaFunction.Arn
       Cors:
         AllowCredentials: false
-        # AllowHeaders:
-        #   - *
+        AllowHeaders:
+          - "*"
         AllowMethods:
           - 'GET'
+          - 'POST'
         AllowOrigins:
           - '*'
-        # ExposeHeaders:
-        #   - *
-        # MaxAge: Integer
 
   CalculatorLambdaFunctionPermissions:
     Type: AWS::Lambda::Permission
