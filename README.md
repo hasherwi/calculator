@@ -1,6 +1,4 @@
-# calculator
-An AWS Calculator Webapp Demo
-
+# Harrison's AWS Calculator Webapp Demo
 Editing:
 - NotePad++ to GitHub Desktop.
 
